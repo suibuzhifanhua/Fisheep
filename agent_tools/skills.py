@@ -410,7 +410,7 @@ SKILLS = [
      "       v1.0.592 起若 JS click 已改变页面状态则【不再】补发真实点击（防止把「点一下\n"
      "       选中、再点取消」的切换型元素点回原位），此时返回 js_effective:true；两个标记\n"
      "       任有一个即算点着，最终一律以 read 结果为准；\n"
-     "       点完 list_wecom_windows 找新窗口，新窗口标题=课程名-中信建投证券学习平台）。\n"
+     "       点完 list_wecom_windows 找新窗口，新窗口标题=课程名-示例公司学习平台）。\n"
      "       若详情页文本含「立即学习」（多任务课程的任务卡）→ 直接用 click_wecom_element 点「立即学习」。\n"
      "    c. 切到新打开的课程学习窗口（courseDetail）：read_wecom_page 判定任务类型：\n"
      "       - 含 <video> 且正文有「MM:SS/MM:SS」时间 → 视频任务：wecom_run_js 一步完成【注入静音三件套+播放+拖到结尾】\n"
