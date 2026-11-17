@@ -1457,7 +1457,7 @@ def test_cleaner_does_not_touch_visible_text():
     """反向确认它不是"清洗过头"：正常中文/空格/连字符必须原样保留。"""
     s = "http://a.com/v1  "
     assert strip_invisible(s) == "http://a.com/v1"
-    assert strip_invisible("中信 建投-模型") == "中信 建投-模型"
+    assert strip_invisible("示例 公司-模型") == "示例 公司-模型"
 
 
 def test_clean_url_and_scheme_judgement():
