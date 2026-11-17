@@ -1,0 +1,14 @@
+# 开发/测试/打包依赖（运行时依赖见 requirements.txt）
+-r requirements.txt
+pyinstaller==6.22.2
+pyinstaller-hooks-contrib==2026.7
+pytest==8.4.2
+# v1.0.588 打包门禁：F821 未定义名检查（build.py check_undefined_names）。
+# 历史 7 处 NameError 被 except Exception 吞成「功能静默失效」，靠它拦在打包前。
+# v1.0.660（审查修复 B12）：**必须钉版**——其余依赖全 `==` 钉死，唯独它裸名。
+# buildlib/gates.py 的 _NOISE_KEYS 按 pyflakes 的**英文原文**匹配
+# （"is assigned to but never used" / "redefinition of unused" /
+# "f-string is missing placeholders"），pyflakes 一升级、改了文案，
+# 这三条就再也匹配不上——静态噪声门禁会静默失效（看着在跑，实际恒绿）。
+# 钉版把这个漂移变成"升级即报错"，由人决定要不要同步改 _NOISE_KEYS。
+pyflakes==4.0.0

@@ -1,0 +1,29 @@
+__pycache__/
+*.pyc
+dist/
+build/
+产物库/
+companion.log*
+experiences.json
+index.html.broken_backup_*
+_probe_dist/
+_probe_build/
+_ocr_probe.py
+_commit_msg.txt
+_proc.txt
+_chk.txt
+_commit_msg.txt
+_proc2.txt
+_tray.txt
+_build_out.txt
+_smoke.txt
+# v1.0.405（M4/L2）：开发机数据不入库
+config.json
+_api.txt
+_old_mgmt.txt
+产物库/断点/
+
+# v1.0.660（审查修复 B2）：onedir spec 由 buildlib/spec_refresh._write_onedir_spec()
+# 从主 spec 派生，落在 build/specs/ 下（build/ 已被上面忽略）；项目根不再留生成物。
+# 下面这行保留：防止旧版本残留的那份被误提交进来。
+WeComCompanion-onedir.spec
