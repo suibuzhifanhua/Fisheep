@@ -1,4 +1,4 @@
-# Fisheep · 企微伴侣（WeComCompanion）
+# Fisheep
 
 Windows 桌面应用（pywebview + Python），面向企业微信场景的 AI 工作伴侣：
 月报/财务批审自动化、学习中心、自我修复体检、多模型 LLM、工作台、知识库等。
