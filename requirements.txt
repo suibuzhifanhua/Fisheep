@@ -1,0 +1,55 @@
+# ---- 直接依赖 + OCR 旁挂组 ----
+# v1.0.661（2026-11-10「全做」审查瘦身）：移除 24 条传递依赖锁项
+#   attrs / blinker / certifi / cffi / charset-normalizer / click / et_xmlfile /
+#   flatbuffers / idna / itsdangerous / Jinja2 / jsonschema-specifications /
+#   MarkupSafe / packaging / primp / protobuf / pycparser / PyYAML / referencing /
+#   rpds-py / six / soupsieve / typing_extensions / urllib3
+# 依据（2026-11-10 双重校验）：① 全项目源码零直接 import（grep 24 个模块名无命中）；
+#   ② venv 元数据反向依赖逐一核实——每个都是下方保留直接依赖的传递依赖
+#   （如 Flask→blinker/click/itsdangerous/Jinja2/MarkupSafe、requests→certifi/
+#   charset-normalizer/idna/urllib3、onnxruntime→flatbuffers/protobuf/packaging、
+#   jsonschema→attrs/jsonschema-specifications/referencing/rpds-py、
+#   clr_loader→cffi→pycparser、rapidocr→PyYAML/six、pystray→six 等），
+#   全新 venv 按本文件安装时 pip 自动解析，无需钉版。
+# 构建 venv 已装齐全部传递包；buildlib 新增 pip check 门禁（v1.0.661）守护
+# 已装环境一致性，漂移会在打包阶段被拦截。
+beautifulsoup4==4.15.0
+clr_loader==0.3.1
+ddgs==9.16.0
+Flask==3.1.3
+jsonschema==4.26.0
+lxml==6.1.2
+# ---- OCR 旁挂（spec excludes，同步到 dist/ocr/）----
+# v1.0.660（审查修复 B18）：这一组**不进 exe**，由 build.py 的 sync_ocr_runtime
+# 从构建 venv 拷到 exe 同级的 ocr/ 目录旁挂（WeComCompanion.spec 的 excludes
+# 里把 cv2/onnxruntime/rapidocr/numpy/shapely/pyclipper 全部排除了）。
+# 合计约 226MB，占 exe 包体 66%，却只在课件采集/扫描件 OCR 时用——移出后
+# exe 146.8MB → ~55MB，冷启动实测 3.4s → ~1.5s。代价是分发要多带一个 ocr/ 目录。
+# 注意：这些包仍**必须装在构建 venv 里**（旁挂源），装完记得重跑 build.py。
+numpy==2.5.2
+olefile==0.47
+onnxruntime==1.29.0
+opencv-python==5.0.0.93
+openpyxl==3.1.5
+pillow==13.0.0   # v1.0.663（#19 pip-audit）：12.3.0 带 40 条已知漏洞（PYSEC-2026-43xx/CVE-2026-112xxx 批），13.0.0 全修复
+pyclipper==1.4.0
+pypdf==6.21.4   # v1.0.663（#19 pip-audit）：6.16.2 带 25 条已知漏洞，6.21.4 全修复
+pypdfium2==5.13.0
+pystray==0.19.5
+python-docx==1.2.0
+python-pptx==1.0.2
+pythonnet==3.1.0
+pywebview==6.2.1
+rapidocr-onnxruntime==1.2.3
+requests==2.34.2
+shapely==2.1.2
+striprtf==0.0.33
+websocket-client==1.9.0
+Werkzeug==3.1.9   # v1.0.663（#19 pip-audit）：3.1.8 带 PYSEC-2026-4312，3.1.9 修复
+waitress==3.0.2   # v1.0.646：生产 WSGI 服务器（SSE 长连接线程池治理）；缺失时 backend.py 自动回退 Werkzeug
+xlrd==2.0.2
+
+# ---- 可选：语音输入（v1.0.523-5，不进 PyInstaller 打包，运行时按需检测）----
+# pip install faster-whisper==1.2.1 "av==16.1.0" huggingface_hub==2.2.0
+# 注意：av 必须 <17（av17+ 移除 metadata_errors 参数，faster-whisper 1.2.1 未适配）；
+# 模型经 HF 镜像下载（HF_ENDPOINT=https://hf-mirror.com，代码已内置）
