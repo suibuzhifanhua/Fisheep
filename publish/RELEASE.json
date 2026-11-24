@@ -1,0 +1,6 @@
+{
+  "release_tag": null,
+  "released_at": null,
+  "summary": "",
+  "_note": "对外发版时由人填写 release_tag / released_at / summary；构建收尾由 buildlib.release.write_release_metadata 同步到镜像根 RELEASE.json，并自动覆盖 build_version / generated_at / mirror_files / mirror_tree_sha256。本地日常打包请保持 null，脚本不产生发布号、不推送。"
+}
