@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "build_version": "1.0.779",
+  "release_tag": null,
+  "released_at": null,
+  "summary": "",
+  "generated_at": "2026-11-26 20:12:45",
+  "source": "version.py::__version__",
+  "mirror_files": 358,
+  "mirror_tree_sha256": "830e4438771c43987924818a63eef26b13792f905cf2d2a3a54ee019b4ef52dd",
+  "note": "构建号每次打包自动同步；release_tag 仅由人工发版填写，本脚本不产生发布号、不推送"
+}
