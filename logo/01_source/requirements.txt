@@ -1,0 +1,4 @@
+# AI 鱼&羊 Logo 源文件依赖（Python 3.12）
+pycairo
+Pillow
+numpy
